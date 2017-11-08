@@ -1,16 +1,22 @@
 var start = document.getElementById('start');
 var stop = document.getElementById('stop');
 var display = document.getElementById('distDisplay');
+var timeDisplay = document.getElementById('timeDisplay');
+var startTime;
 var startPos;
 start.addEventListener('click', function(event){
   navigator.geolocation.getCurrentPosition(function(position){
+   startTime = moment();					
    startPos = position;
   });
 });	
     
 stop.addEventListener('click', function(){
   navigator.geolocation.getCurrentPosition(function(position){
+    var endTime = moment(); 
+					
     display.innerHTML = distance(startPos.coords.latitude, startPos.coords.longitude, position.coords.latitude, position.coords.longitude);
+    timeDisplay.innerHTML = time(startTime, endTime);
   });
 });
 
@@ -27,4 +33,8 @@ function distance(lat1, lon1, lat2, lon2, unit) {
  if (unit=="K") { dist = dist * 1.609344 }
  if (unit=="N") { dist = dist * 0.8684 }
  return dist;
+}
+
+function time(start, end){
+	return moment(moment(start,"hh:mm:ss")).diff(moment(end,"hh:mm:ss))).format("hh:mm:ss");
 }
