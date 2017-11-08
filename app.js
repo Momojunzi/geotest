@@ -36,5 +36,5 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 }
 
 function time(start, end){
-	return moment(moment(start,"hh:mm:ss")).diff(moment(end,"hh:mm:ss))).format("hh:mm:ss");
+	return moment(moment(start,"hh:mm:ss")).diff(moment(end,"hh:mm:ss"))).format("hh:mm:ss");
 }
